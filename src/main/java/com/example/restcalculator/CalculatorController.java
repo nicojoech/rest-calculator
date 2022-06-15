@@ -7,31 +7,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CalculatorController {
 
+    Calculator calculator = new Calculator();
+
     @RequestMapping("/sum")
     public int sum(
             @RequestParam int a,
             @RequestParam int b
     ) {
-        return a + b;
+        return calculator.sum(a, b);
     }
 
     @RequestMapping("/mul")
-    int multiply(@RequestParam int a, @RequestParam int b) {
-        return a * b;
+    int multiply(
+            @RequestParam int a,
+            @RequestParam int b
+    ) {
+        return calculator.mul(a, b);
     }
 
     @RequestMapping("/quad")
     public int quad(
             @RequestParam int a
     ) {
-        return a * a;
+        return calculator.quad(a);
     }
 
     @RequestMapping("/abs")
     public int abs(
             @RequestParam int a
     ) {
-        return Math.abs(a);
+        return calculator.abs(a);
     }
 
     @RequestMapping("/exp")
@@ -39,23 +44,8 @@ public class CalculatorController {
             @RequestParam double a,
             @RequestParam double b
     ) {
-        if (b == 0) {
-            return 1;
-        } else if (b < 0) {
-            return 1 / exp2(a, b);
-        } else {
-            return exp2(a, b);
-        }
+        return calculator.exp(a, b);
     }
 
-    public double exp2(double a, double b) {
-        int val = 1;
-        if (b < 0) {
-            b *= -1;
-        }
-        for (int i = 0; i < b; i++) {
-            val *= a;
-        }
-        return val;
-    }
+
 }
